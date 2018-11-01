@@ -11,18 +11,29 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <Button
-            android:id="@+id/guitar"
+        <TextView
+            android:id="@+id/magneticField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/mode1"
-            android:layout_weight="1"/>
-        <Button
-            android:id="@+id/randomPiano"
+            android:layout_weight="1"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/chordSelect"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/mode2"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
     </LinearLayout>
+
 
 </android.support.constraint.ConstraintLayout>

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ActionMusic001</string>
+    <string name="mode1">Guitar</string>
+    <string name="mode2">Random Piano</string>
 </resources>
