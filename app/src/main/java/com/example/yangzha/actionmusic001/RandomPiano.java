@@ -1,7 +1,6 @@
 package com.example.yangzha.actionmusic001;
 
 import android.content.Context;
-import android.content.res.AssetManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -9,8 +8,6 @@ import android.hardware.SensorManager;
 import android.media.AudioFormat;
 import android.media.AudioManager;
 import android.media.AudioTrack;
-import android.os.Handler;
-import android.os.PowerManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,8 +21,6 @@ import android.widget.TextView;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Timer;
-import java.util.TimerTask;
 import java.util.UUID;
 
 public class RandomPiano extends AppCompatActivity implements SensorEventListener {
@@ -39,14 +34,16 @@ public class RandomPiano extends AppCompatActivity implements SensorEventListene
     private SensorManager sensorManager;
     private Sensor accelerometerSensor;
     private Sensor magneticFieldSensor;
+
     float[] aValues = new float[3];
     float[] mValues = new float[3];
-    float[] angles = new float[3];
     int toneSelect = 4;
 
-    private TextView accelerometerText, noteText, toneSelectText;
+    int noteArrayLen = 50;
+    String[] noteArray = new String[noteArrayLen];
+    int cur = 0;
 
-    Handler handler = new Handler();
+    private TextView accelerometerText, noteText, toneSelectText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +56,7 @@ public class RandomPiano extends AppCompatActivity implements SensorEventListene
 
         accelerometerText = (TextView) findViewById(R.id.accelerometer);
         noteText = (TextView) findViewById(R.id.note);
-        toneSelectText = (TextView) findViewById(R.id.noteSelect);
+        toneSelectText = (TextView) findViewById(R.id.toneSelect);
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
@@ -143,7 +140,17 @@ public class RandomPiano extends AppCompatActivity implements SensorEventListene
     {
         String id = UUID.randomUUID().toString();
         isPlaying = true;
-        noteText.setText(noteName);
+        noteArray[cur%noteArrayLen] = noteName;
+        StringBuilder builder = new StringBuilder();
+        for (int i=0; i<noteArrayLen; ++i) {
+            if (noteArray[(i + cur + 1) % noteArrayLen] != null) {
+                builder.append(noteArray[(i + cur + 1) % noteArrayLen]);
+            }
+        }
+        cur++;
+        String NoteStream = builder.toString();
+        noteText.setText(NoteStream);
+
         Log.i("playSound", id + noteName);
         PlayThread thread_playNote = new PlayThread(noteName, 0.25, id);
         thread_playNote.start();

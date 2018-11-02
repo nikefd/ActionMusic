@@ -1,7 +1,6 @@
 package com.example.yangzha.actionmusic001;
 
 import android.content.Context;
-import android.content.res.AssetManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -9,23 +8,16 @@ import android.hardware.SensorManager;
 import android.media.AudioFormat;
 import android.media.AudioManager;
 import android.media.AudioTrack;
-import android.os.Handler;
-import android.os.PowerManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.view.WindowManager;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Timer;
-import java.util.TimerTask;
 import java.util.UUID;
 
 public class Guitar extends AppCompatActivity implements SensorEventListener {
@@ -44,8 +36,6 @@ public class Guitar extends AppCompatActivity implements SensorEventListener {
     float[] angles = new float[3];
 
     private TextView chordText, anglesText;
-
-    Handler handler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
